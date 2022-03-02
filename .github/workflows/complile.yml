@@ -9,12 +9,21 @@ jobs:
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v3
-      - name: compile
-        run: |
-          ls -R
-          sh  ${GITHUB_WORKSPACE}/.github/compile.sh
-      - name: upload compiled document
-        uses: actions/upload-artifact@v2
+      - name: get tags
+        uses: octokit/request-action@v2.1.0
+        id: get_tags
         with:
-          name: thesis.pdf
-          path: thesis.pdf
+          route: GET /repos/{owner}/{repo}/git/matching-refs/tags
+          owner: Hugo-Leung
+          repo: gitaction
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: "echo latest release: ${{ steps.get_tags.outputs.data }}"
+#      - name: compile
+#        run: |
+#          sh  ${GITHUB_WORKSPACE}/.github/compile.sh
+#      - name: upload compiled document
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: thesis.pdf
+#          path: thesis.pdf
