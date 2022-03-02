@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Get previous tag name
         id: previous_tag
-        run: echo "::set-output name=TAGNAME::$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))"
+        run: echo "::set-output name=TAGNAME::$(git describe --abbrev=0 --tags $(git rev-list --tags ))"
       - run: "echo tags: ${{ steps.previous_tag.outputs.TAGNAME }}"
 #      - name: compile
 #        run: |
