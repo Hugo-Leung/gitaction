@@ -9,16 +9,10 @@ jobs:
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v3
-      - name: get tags
-        uses: octokit/request-action@v2.1.0
-        id: get_tags
-        with:
-          route: GET /repos/{owner}/{repo}/git/matching-refs/tags
-          owner: Hugo-Leung
-          repo: gitaction
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: "echo tags: ${{ fromJson(steps.get_tags.outputs.data).ref }}"
+      - name: Get previous tag name
+        id: previous_tag
+        run: echo "::set-output name=TAGNAME::$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))"
+      - run: "echo tags: ${{ steps.previous_tag.outputs.TAGNAME }}"
 #      - name: compile
 #        run: |
 #          sh  ${GITHUB_WORKSPACE}/.github/compile.sh
