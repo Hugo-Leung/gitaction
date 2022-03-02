@@ -10,10 +10,9 @@ jobs:
       - name: Set up Git repository
         uses: actions/checkout@v3
       - name: compile
-        run:
-          ls
-          chmod +x "${GITHUB_WORKSPACE}/.github/compile.sh"
-          "${GITHUB_WORKSPACE}/.github/compile.sh"
+        run: |
+          ls -R
+          sh  ${GITHUB_WORKSPACE}/.github/compile.sh
       - name: upload compiled document
         uses: actions/upload-artifact@v2
         with:
