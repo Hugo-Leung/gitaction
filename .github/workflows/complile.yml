@@ -12,11 +12,9 @@ jobs:
       - name: Get previous tag name
         id: previous_tag
         run: |
-           output=$(python3 .github/git_tag.py)
-           output="${output//'%'/'%25'}"
-           output="${output//$'\n'/'%0A'}"
-           output="${output//$'\r'/'%0D'}"
-           echo "::set-output name=TAGNAME::$output"
+          python3 .github/git_tag.py
+          output=$(python3 .github/git_tag.py)
+          echo "::set-output name=TAGNAME::$output"
       - run: "echo tags: ${{ steps.previous_tag.outputs.TAGNAME }}"
 #      - name: compile
 #        run: |
