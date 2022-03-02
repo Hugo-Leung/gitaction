@@ -17,3 +17,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: thesis.pdf
+          path: thesis.pdf
