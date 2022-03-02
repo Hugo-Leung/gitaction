@@ -18,7 +18,7 @@ jobs:
           repo: gitaction
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: "echo latest release: ${{ steps.get_tags.outputs.data }}"
+      - run: "echo latest release: ${{ steps.get_tags.outputs.data.ref }}"
 #      - name: compile
 #        run: |
 #          sh  ${GITHUB_WORKSPACE}/.github/compile.sh
