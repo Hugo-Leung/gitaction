@@ -3,16 +3,17 @@ on:
   push:
 jobs:
   build_latex:
+    runs-on: ubuntu-latest
     container: 
-        images: texlive/texlive:latest 
-            steps:
-                -name: Set up Git repository
-                uses: actions/checkout@latest
-                -name: compile latex
-                run:
-                    chmod +x "${GITHUB_WORKSPACE}/.github/compile.sh"
-                    "${GITHUB_WORKSPACE}/.github/compile.sh"
-                -name: upload 
-                uses: actions/upload-artifact@v2
-                with:
-                    name: thesis.pdf
+      image: texlive/texlive:latest 
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@latest
+      - name: compile
+        run:
+          chmod +x "${GITHUB_WORKSPACE}/.github/compile.sh"
+          "${GITHUB_WORKSPACE}/.github/compile.sh"
+      - name: upload compiled document
+        uses: actions/upload-artifact@latest
+        with:
+          name: thesis.pdf
