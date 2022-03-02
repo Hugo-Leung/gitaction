@@ -11,7 +11,12 @@ jobs:
         uses: actions/checkout@v3
       - name: Get previous tag name
         id: previous_tag
-        run: echo "::set-output name=TAGNAME::$(python3 ${GITHUB_WORKSPACE}/.github/git_tag.py))"
+        run: |
+           output=$(python3 .github/git_tag.py)
+           output="${output//'%'/'%25'}"
+           output="${output//$'\n'/'%0A'}"
+           output="${output//$'\r'/'%0D'}"
+           echo "::set-output name=TAGNAME::$output"
       - run: "echo tags: ${{ steps.previous_tag.outputs.TAGNAME }}"
 #      - name: compile
 #        run: |
@@ -20,4 +25,4 @@ jobs:
 #        uses: actions/upload-artifact@v2
 #        with:
 #          name: thesis.pdf
-#          path: thesis.pdf
+#          path: thesis.pd
