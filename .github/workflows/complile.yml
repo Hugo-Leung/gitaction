@@ -1,6 +1,8 @@
 name: Build LaTeX document
 on:
   push:
+    tags:
+      - "v*"
 jobs:
   build_latex:
     runs-on: ubuntu-latest
@@ -24,9 +26,8 @@ jobs:
         run: |
           sh  ${GITHUB_WORKSPACE}/.github/compile.sh ${tag}
       - name: upload compiled document
-        uses: actions/upload-artifact@v2
+        uses: softprops/action-gh-release@v1
         with:
-          name: thesis
-          path: |
+          files: |
             build/*.pdf
             diff/*.pdf
