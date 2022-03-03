@@ -7,7 +7,7 @@ if __name__== "__main__":
 
     if len(sys.argv)>1:
         ref = sys.argv[1]
-        if ref.startswith("refs/tags/")
+        if ref.startswith("refs/tags/"):
             current_tag=ref.replace("refs/tags/","")
     result = subprocess.run(['git', 'tag' ,'-l', '--sort=committerdate'], stdout=subprocess.PIPE) 
     tags_list = (result.stdout).decode("utf-8").split('\n')[:-1]
