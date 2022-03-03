@@ -12,6 +12,8 @@ jobs:
       - name: Get previous tag name
         id: previous_tag
         run: |
+          which python3
+          ls -aR
           python3 .github/git_tag.py
           output=$(python3 .github/git_tag.py)
           echo "::set-output name=TAGNAME::$output"
