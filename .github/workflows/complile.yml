@@ -16,15 +16,17 @@ jobs:
         env:
           ref: ${{ github.ref }}
         run: |
-          echo ${ref}
           output=$(python3 .github/git_tag.py ${ref}) 
           echo "::set-output name=TAGNAME::$output"
-      - run: "echo tags: ${{ steps.previous_tag.outputs.TAGNAME }}"
-#      - name: compile
-#        run: |
-#          sh  ${GITHUB_WORKSPACE}/.github/compile.sh
-#      - name: upload compiled document
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: thesis.pdf
-#          path: thesis.pd
+      - name: compile
+        env:
+          tag: steps.previous_tag.outputs.TAGNAME
+        run: |
+          sh  ${GITHUB_WORKSPACE}/.github/compile.sh ${tag}
+      - name: upload compiled document
+        uses: actions/upload-artifact@v2
+        with:
+          name: thesis
+          path: |
+            build/thesis.pdf
+            diff/diff.pdf
