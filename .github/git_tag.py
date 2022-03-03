@@ -12,7 +12,7 @@ if __name__== "__main__":
     """
     result = subprocess.run(['git', 'tag', '-l', '--sort=committerdate'], stdout=subprocess.PIPE)
     tags_list = (result.stdout).decode("utf-8").split('\n')[:-1]
-    print(tags_list)
+    #print(tags_list)
     """
     previous_tag="empty"
     flag=False
