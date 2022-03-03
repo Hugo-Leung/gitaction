@@ -7,7 +7,7 @@ if __name__== "__main__":
 
     if len(sys.argv)>1:
         current_tag = sys.argv[1]
-    result = subprocess.run(['git', 'ls-remote', '--tags' ,'-q', '--sort=committerdate'], stdout=subprocess.PIPE) #git 'ls-remote' --tags -q --sort=committerdate
+    result = subprocess.run(['git', 'tag' ,'-l', '--sort=committerdate'], stdout=subprocess.PIPE) 
     tags_list = (result.stdout).decode("utf-8")#.split('\n')
     print(tags_list)
     """

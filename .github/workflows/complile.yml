@@ -9,12 +9,15 @@ jobs:
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v3
+        with: 
+          fetch-depth: 0
       - name: Get previous tag name
         id: previous_tag
         run: |
           python3 .github/git_tag.py
           #output=$(python3 .github/git_tag.py)
           #echo "::set-output name=TAGNAME::$output"
+          echo "::set-output name=TAGNAME::test"
       - run: "echo tags: ${{ steps.previous_tag.outputs.TAGNAME }}"
 #      - name: compile
 #        run: |
