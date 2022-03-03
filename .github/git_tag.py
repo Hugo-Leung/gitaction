@@ -8,8 +8,8 @@ if __name__== "__main__":
     if len(sys.argv)>1:
         current_tag = sys.argv[1]
     result = subprocess.run(['git', 'ls-remote', '--tags' ,'-q', '--sort=committerdate'], stdout=subprocess.PIPE) #git 'ls-remote' --tags -q --sort=committerdate
-    tags_list = (result.stdout).decode("utf-8").split('\n')[:-1]
-    print(tags_list[0].split())
+    tags_list = (result.stdout).decode("utf-8")#.split('\n')
+    print(tags_list)
     """
     previous_tag="empty"
     flag=False
