@@ -9,5 +9,4 @@ if [ -n "${prev_tag}" ]; then
 	diffName=${MAIN}-diff${prev_tag}
 	echo ${diffName}
 	latexmk ${latex_option} -outdir=diff ${diffName}
-	mv diff/${diffName}.pdf diff/diff.pdf
 fi

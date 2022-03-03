@@ -20,7 +20,7 @@ jobs:
           echo "::set-output name=TAGNAME::$output"
       - name: compile
         env:
-          tag: steps.previous_tag.outputs.TAGNAME
+          tag: ${{ steps.previous_tag.outputs.TAGNAME }}
         run: |
           sh  ${GITHUB_WORKSPACE}/.github/compile.sh ${tag}
       - name: upload compiled document
@@ -28,5 +28,5 @@ jobs:
         with:
           name: thesis
           path: |
-            build/thesis.pdf
-            diff/diff.pdf
+            build/*.pdf
+            diff/*.pdf
